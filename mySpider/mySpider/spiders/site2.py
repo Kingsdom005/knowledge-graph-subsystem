@@ -8,6 +8,16 @@ from ..items import Site2Item
 class Site2Spider(scrapy.Spider):
     name = "site2"
     allowed_domains = ["collections.artsmia.org","new.artsmia.org","iiif.dx.artsmia.org"]
+
+    ERROR_COUNT = 0
+    PASS_COUNT = 0
+    SUCCESS_COUNT = 0
+    TOTAL_COUNT = 0
+
+    start_id = 1
+    end_id = 4000
+
+    f = None
     # start_urls = (
     #https://artstories.artsmia.org/#/o/1854
     #https://iiif.dx.artsmia.org/1854.jpg/info.json
@@ -21,40 +31,74 @@ class Site2Spider(scrapy.Spider):
 
         data = json.loads(response.body)
         # print(data)
-        id = re.compile("id/(\d*)").findall(response.url)[0]
-
-        items = []
+        #id = re.compile("id/(\d*)").findall(response.url)[0]
+        #items = []
         item = Site2Item()
+        try:
+            item["id"] = data["id"]
+            item["title"] = data["title"]
+            item["dated"] = data["dated"]
+            item["artist"] = data["artist"]
+            item["role"] = data["role"]
+            item["department"] = data["department"]
+            item["medium"] = data["medium"]
 
-        item["id"] = data["id"]
-        item["title"] = data["title"]
-        item["dated"] = data["dated"]
-        item["artist"] = data["artist"]
-        item["role"] = data["role"]
-        item["department"] = data["department"]
-        item["medium"] = data["medium"]
+            item["country"] = data["country"]
 
-        item["country"] = data["country"]
+            item["description"] = data["description"]
+            item["comments"] = data["text"]
 
-        item["description"] = data["description"]
-        item["comments"] = data["text"]
+            item["web_url"] = "https://collections.artsmia.org/art/%s" % (data["id"])
+            item["img_url"] = "https://6.api.artsmia.org/%s.jpg"%(data["id"])
 
-        item["web_url"] = "https://collections.artsmia.org/art/%s" % (data["id"])
-        item["img_url"] = "https://6.api.artsmia.org/%s.jpg"%(data["id"])
+            item["submit_time"] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
 
-        item["submit_time"] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
-
-        if data["country"] == "China" or data["country"] == "china":
-            yield item
-        else:
-            print("Ignore place %s" % (data["country"]))
+            if data["country"] == "China" or data["country"] == "china":
+                self.SUCCESS_COUNT += 1
+                self.TOTAL_COUNT += 1
+                self.set_log(msg="Crawl {}: Success.".format(response.url))
+                yield item
+            else:
+                self.PASS_COUNT += 1
+                self.TOTAL_COUNT += 1
+                # print("Ignore place %s" % (data["country"]))
+                self.set_log(msg="Crawl {}: Pass. Ignore place {}" .format(response.url, data["country"]))
+        except Exception as e:
+            # error log
+            self.ERROR_COUNT += 1
+            self.TOTAL_COUNT += 1
+            # print("Error msg as %s"%e)
+            self.set_log(msg="Crawl {}: Error. Error msg as {}".format(response.url, e))
+            return
 
     def start_requests(self):
+        # clear store/02.json
+        with open("store/2.json","w") as ff:
+            ff.close()
+        # file stream
+        self.f = open("store/site2_log.txt","w",encoding="utf-8")
+        # start crawl
         base_url = "https://search.artsmia.org/id/"
-        for i in range(2000):
+        for i in range(self.start_id,self.end_id): #2000
             url = base_url + str(i)
-            yield Request(url)
+            header = {
+                "Cookie":'_gcl_au=1.1.1872783380.1680790619; _ga_T0BL8ZBKC1=GS1.1.1681305320.10.1.1681307464.0.0.0; _ga=GA1.1.634546262.1680790619',
+                "User-Agent":'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36'
+            }
+            yield Request(url=url, headers=header)
 
-
+    def set_log(self, msg):
+        # write file
+        self.f.write(msg+"\n")
+        # output to screen
+        if self.TOTAL_COUNT == self.end_id - self.start_id:
+            # output to screen
+            info = "\n\n###################################\n" \
+                  "Error-{} Pass-{} Success-{} Total-{}\n" \
+                  "###################################\n".format(self.ERROR_COUNT, self.PASS_COUNT, self.SUCCESS_COUNT, self.TOTAL_COUNT)
+            print(info)
+            # close file
+            self.f.write(info)
+            self.f.close()
 
 
