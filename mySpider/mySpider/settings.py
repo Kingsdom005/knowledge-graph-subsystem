@@ -25,7 +25,9 @@ ROBOTSTXT_OBEY = False ## 关掉君子协议
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
+
 DOWNLOAD_DELAY = 1  # 设置爬虫时间
+
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16

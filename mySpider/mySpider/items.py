@@ -5,6 +5,12 @@
 
 import scrapy
 
+
+class ItcastItem(scrapy.Item):
+    name = scrapy.Field()
+    title = scrapy.Field()
+    info = scrapy.Field()
+
 class Site2Item(scrapy.Item):
     # 如标题、时代、介绍等；文物对应的详情页面的URL；文物图片（原图，爬取请注意检查，部分网站可能需要手动解析原图地址）；原图下载链接。
 

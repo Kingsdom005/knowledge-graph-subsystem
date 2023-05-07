@@ -14,8 +14,8 @@ class Site2Spider(scrapy.Spider):
     SUCCESS_COUNT = 0
     TOTAL_COUNT = 0
 
-    start_id = 1
-    end_id = 4000
+    start_id = 0
+    end_id = 6666 # max approx 6666
 
     f = None
     # start_urls = (
@@ -53,6 +53,15 @@ class Site2Spider(scrapy.Spider):
 
             item["submit_time"] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
 
+            ####################
+
+            # self.SUCCESS_COUNT += 1
+            # self.TOTAL_COUNT += 1
+            # self.set_log(msg="Crawl {}: Success.".format(response.url))
+            # yield item
+
+            ####################
+
             if data["country"] == "China" or data["country"] == "china":
                 self.SUCCESS_COUNT += 1
                 self.TOTAL_COUNT += 1
@@ -63,6 +72,8 @@ class Site2Spider(scrapy.Spider):
                 self.TOTAL_COUNT += 1
                 # print("Ignore place %s" % (data["country"]))
                 self.set_log(msg="Crawl {}: Pass. Ignore place {}" .format(response.url, data["country"]))
+
+
         except Exception as e:
             # error log
             self.ERROR_COUNT += 1
@@ -73,13 +84,13 @@ class Site2Spider(scrapy.Spider):
 
     def start_requests(self):
         # clear store/02.json
-        with open("store/2.json","w") as ff:
+        with open("save/2.json","w") as ff:
             ff.close()
         # file stream
-        self.f = open("store/site2_log.txt","w",encoding="utf-8")
+        self.f = open("save/site2_log.txt","w",encoding="utf-8")
         # start crawl
         base_url = "https://search.artsmia.org/id/"
-        for i in range(self.start_id,self.end_id): #2000
+        for i in range(self.start_id,self.end_id): # 2000
             url = base_url + str(i)
             header = {
                 "Cookie":'_gcl_au=1.1.1872783380.1680790619; _ga_T0BL8ZBKC1=GS1.1.1681305320.10.1.1681307464.0.0.0; _ga=GA1.1.634546262.1680790619',
@@ -89,13 +100,13 @@ class Site2Spider(scrapy.Spider):
 
     def set_log(self, msg):
         # write file
-        self.f.write(msg+"\n")
+        self.f.write(msg + " [" + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()) + "]\n")
         # output to screen
         if self.TOTAL_COUNT == self.end_id - self.start_id:
             # output to screen
-            info = "\n\n###################################\n" \
-                  "Error-{} Pass-{} Success-{} Total-{}\n" \
-                  "###################################\n".format(self.ERROR_COUNT, self.PASS_COUNT, self.SUCCESS_COUNT, self.TOTAL_COUNT)
+            info = "\n\n########################################\n\n" \
+                  "Error-{} Pass-{} Success-{} Total-{}\n\n" \
+                  "########################################\n".format(self.ERROR_COUNT, self.PASS_COUNT, self.SUCCESS_COUNT, self.TOTAL_COUNT)
             print(info)
             # close file
             self.f.write(info)
