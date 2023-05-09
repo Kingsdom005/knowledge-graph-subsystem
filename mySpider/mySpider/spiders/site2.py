@@ -15,8 +15,8 @@ class Site2Spider(scrapy.Spider):
     SUCCESS_COUNT = 0
     TOTAL_COUNT = 0
     # data range
-    start_id = 50
-    end_id = 70 # max approx 6666
+    start_id = 0
+    end_id = 6666 # max approx 6666
     # run time
     start_time = 0
     end_time = 0
