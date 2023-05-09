@@ -22,9 +22,8 @@ def antiInsectBrowser():
 print(ChromeDriverManager().install())
 
 driver = antiInsectBrowser() #webdriver.Chrome(ChromeDriverManager().install())
-ress=driver.get("https://www.roots.gov.sg/search?query=china&page=2")
+driver.get("https://www.roots.gov.sg/search?query=china&page=2")
 
-print(ress)
 time.sleep(1)
 datas = driver.page_source
 
