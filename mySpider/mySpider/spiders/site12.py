@@ -1,19 +1,24 @@
 import json, time
 import scrapy
-from scrapy import FormRequest, Request
-
+from scrapy import Request
+import os
 from ..items import Site2Item
-
 
 class Site12Spider(scrapy.Spider):
     name = "site12"
     allowed_domains = ["www.nga.gov"]
 
+    # count
     ERROR_COUNT = 0
     PASS_COUNT = 0
     SUCCESS_COUNT = 0
     TOTAL_COUNT = 0
+    # run time
+    start_time = 0
+    end_time = 0
+    # file handle
     f = None
+
 
     # start_urls = ["https://www.nga.gov/exhibitions/2023/going-through-hell-divine-dante.html"] #"https://www.nga.gov/",
 
@@ -75,10 +80,10 @@ class Site12Spider(scrapy.Spider):
 
 
     def start_requests(self):
-
-        with open("save/12.json","w") as ff:
-            ff.close()
-
+        self.start_time = time.time()
+        self.check_path()
+        self.clear_file()
+        # data range
         itemCount = 860 # max 860
         pageSize = 30
         maxPage = (int)(itemCount/pageSize) + 1 # 28+1
@@ -93,11 +98,34 @@ class Site12Spider(scrapy.Spider):
         #print(self.TOTAL_COUNT)
         # output to screen
         if self.TOTAL_COUNT == 840:
+            self.end_time = time.time()
+            # runtime using round function
+            run_time = round(self.end_time - self.start_time)
+            # calculate hour minute second
+            hour = run_time // 3600
+            minute = (run_time - 3600 * hour) // 60
+            second = run_time - 3600 * hour - 60 * minute
+            # output to file
+            self.f.write('\nTotal program running time (hour:minute:second) is %d:%02d:%02d\n' % (hour, minute, second))
             # output to screen
-            info = "\n\n##########################################\n\n" \
+            info = "\n##########################################\n\n" \
                   "Error-{} Pass-{} Success-{} Total-{}\n\n" \
                   "##########################################\n".format(self.ERROR_COUNT, self.PASS_COUNT, self.SUCCESS_COUNT, self.TOTAL_COUNT)
             print(info)
             # close file
             self.f.write(info)
             self.f.close()
+    def check_path(self):
+        if not os.path.exists("./save"):
+            os.makedirs("./save")
+    def clear_file(self):
+        choice = input("clear file 12.json and 12.csv? (Yes/No): ")
+        if not ("Yes" in choice or "yes" in choice):
+            return False
+        # choose clear file
+        clear_files = ['12.json','12.csv']
+        # clear file
+        for fileName in clear_files:
+            with open("save/{}".format(fileName),"w") as ff:
+                ff.close()
+        return True

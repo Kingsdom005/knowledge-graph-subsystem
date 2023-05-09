@@ -3,6 +3,7 @@ import scrapy
 from scrapy import FormRequest, Request
 import json
 from ..items import Site2Item
+import os
 class Site7Spider(scrapy.Spider):
     name = "site7"
     allowed_domains = ["www.vam.ac.uk","collections.vam.ac.uk/"]
@@ -10,14 +11,18 @@ class Site7Spider(scrapy.Spider):
     # https://collections.vam.ac.uk/item/id
     # https://api.vam.ac.uk/v2/objects/search?page=n&page_size=15
 
+    # count
     ERROR_COUNT = 0
     PASS_COUNT = 0
     SUCCESS_COUNT = 0
     TOTAL_COUNT = 0
-
+    # data page range
     start_page = 1
-    end_page = 66 # max approx 66
-
+    end_page = 66 # max page approx 66
+    # run time
+    start_time = 0
+    end_time = 0
+    # file handle
     f = None
 
     def parse(self, response, *args, **kwargs):
@@ -29,9 +34,11 @@ class Site7Spider(scrapy.Spider):
             yield Request(url=next_url, callback=self.parse_second,meta={"dated":data['_primaryDate'],"place":data['_primaryPlace']}, dont_filter=True) # 必须添加dont_filter防止忽略url
 
     def start_requests(self):
-        # clear store/7.json
-        with open("save/7.json", "w") as ff:
-            ff.close()
+        # time record
+        self.start_time = time.time()
+        # init output file
+        self.check_path()
+        self.clear_file()
         # file stream
         self.f = open("save/site7_log.txt", "w", encoding="utf-8")
         for i in range(self.start_page,self.end_page+1): # 请求前100页数据 max 666
@@ -90,11 +97,38 @@ class Site7Spider(scrapy.Spider):
         # self.f.write("Total:{}\n".format(self.TOTAL_COUNT))
         # output to screen
         if self.TOTAL_COUNT == (self.end_page - self.start_page) * 15:
+            # record time
+            self.end_time = time.time()
+            # log runtime hour:minute:seconds
+            self.end_time = time.time()
+            # runtime using round function
+            run_time = round(self.end_time - self.start_time)
+            # calculate hour minute second
+            hour = run_time // 3600
+            minute = (run_time - 3600 * hour) // 60
+            second = run_time - 3600 * hour - 60 * minute
+            # output to file
+            self.f.write('\nTotal program running time (hour:minute:second) is %d:%02d:%02d\n' % (hour, minute, second))
             # output to screen
-            info = "\n\n########################################\n\n" \
+            info = "\n########################################\n\n" \
                   "Error-{} Pass-{} Success-{} Total-{}\n\n" \
                   "########################################\n".format(self.ERROR_COUNT, self.PASS_COUNT, self.SUCCESS_COUNT, self.TOTAL_COUNT)
             print(info)
             # close file
             self.f.write(info)
             self.f.close()
+
+    def check_path(self):
+        if not os.path.exists("./save"):
+            os.makedirs("./save")
+    def clear_file(self):
+        choice = input("clear file 7.json and 7.csv? (Yes/No): ")
+        if not ("Yes" in choice or "yes" in choice):
+            return False
+        # choose clear file
+        clear_files = ['7.json','7.csv']
+        # clear file
+        for fileName in clear_files:
+            with open("save/{}".format(fileName),"w") as ff:
+                ff.close()
+        return True

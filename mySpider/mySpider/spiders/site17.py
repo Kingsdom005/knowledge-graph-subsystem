@@ -1,4 +1,4 @@
-import json
+import json, os
 import time
 
 import scrapy
@@ -10,16 +10,21 @@ from ..utils import req_site17
 class Site17Spider(scrapy.Spider):
     name = "site17"
     allowed_domains = ["www.roots.gov.sg"]
-
+    # count
     ERROR_COUNT = 0
     PASS_COUNT = 0
     SUCCESS_COUNT = 0
     TOTAL_COUNT = 0
+    # run time
+    start_time = 0
+    end_time = 0
+    # file handle
     f = None
 
     def parse(self, response, *args, **kwargs):
-        # 配置 headers
+        # items
         items = []
+        # data range max 10 700 10
         for i in range(10,700,10):
             documents = json.loads(req_site17(frm=i))
             success_local_count = 0
@@ -72,7 +77,17 @@ class Site17Spider(scrapy.Spider):
             self.SUCCESS_COUNT += success_local_count
             self.ERROR_COUNT += error_local_count
             self.TOTAL_COUNT += success_local_count + error_local_count
-
+        # end request
+        # record time
+        self.end_time = time.time()
+        # runtime using round function
+        run_time = round(self.end_time - self.start_time)
+        # calculate hour minute second
+        hour = run_time // 3600
+        minute = (run_time - 3600 * hour) // 60
+        second = run_time - 3600 * hour - 60 * minute
+        # output to file
+        self.f.write('\nTotal program running time (hour:minute:second) is %d:%02d:%02d\n' % (hour, minute, second))
         info = "\n\n##########################################\n\n" \
                "Error-{} Pass-{} Success-{} Total-{}\n\n" \
                "##########################################\n".format(self.ERROR_COUNT, self.PASS_COUNT,
@@ -82,8 +97,11 @@ class Site17Spider(scrapy.Spider):
         return items
 
     def start_requests(self):
-        with open("save/17.json", "w", encoding="utf-8") as ff:
-            ff.close()
+        self.start_time = time.time()
+        # check path
+        self.check_path()
+        self.clear_file()
+        # write log
         self.f = open('save/site17_log.txt',"w", encoding="utf-8")
         url = 'https://www.roots.gov.sg/get-search-results'
         yield FormRequest(
@@ -103,14 +121,18 @@ class Site17Spider(scrapy.Spider):
                 "searchMode": "NEW"
             },
         )
-    # def set_log(self):
-    #     print("TOTAL SUCCESS ERROR",self.TOTAL_COUNT,self.SUCCESS_COUNT,self.ERROR_COUNT)
-        # if self.TOTAL_COUNT == 840:
-        #     # output to screen
-        #     info = "\n\n##########################################\n\n" \
-        #           "Error-{} Pass-{} Success-{} Total-{}\n\n" \
-        #           "##########################################\n".format(self.ERROR_COUNT, self.PASS_COUNT, self.SUCCESS_COUNT, self.TOTAL_COUNT)
-        #     print(info)
-        #     # close file
-        #     self.f.write(info)
-        #     self.f.close()
+
+    def check_path(self):
+        if not os.path.exists("./save"):
+            os.makedirs("./save")
+    def clear_file(self):
+        choice = input("clear file 17.json and 17.csv? (Yes/No): ")
+        if not ("Yes" in choice or "yes" in choice):
+            return False
+        # choose clear file
+        clear_files = ['17.json','17.csv']
+        # clear file
+        for fileName in clear_files:
+            with open("save/{}".format(fileName),"w") as ff:
+                ff.close()
+        return True

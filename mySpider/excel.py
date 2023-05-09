@@ -1,3 +1,5 @@
+import os.path
+
 import xlsxwriter as xw
 import requests
 
@@ -71,12 +73,22 @@ def xw_toExcel(data, fileName, title):  # xlsxwriter库储存数据到excel
     # close table
     workbook.close()
 
+def checkPath():
+    if not os.path.exists("./triples"):
+        os.makedirs("./triples")
+    subpaths = ['f2','f7','f12','f17','f22']
+    for path in subpaths:
+        if not os.path.exists("./triples/{}".format(path)):
+            os.makedirs("./triples/{}".format(path))
+
 if __name__ == "__main__":
 
     # id_triples, dated_triples, artist_triples, role_triples, department_triples, medium_triples, description_triples, comments_triples, web_url_triples, img_url_triples = parse_ternary()
     # print(id_triples, dated_triples, artist_triples, role_triples, department_triples, medium_triples,
     #       description_triples, comments_triples, web_url_triples, img_url_triples)
 
+    # check path
+    checkPath()
     # data initialization
     choices = [2, 7, 12, 17, 22]
     fields = ['id', 'dated', 'artist', 'role', 'department', 'medium', 'description', 'comments', 'web_url', 'img_url']
