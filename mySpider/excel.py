@@ -6,7 +6,7 @@ import requests
 # get data from my server and parse it into a triplet form
 def parse_ternary(choice):
     # get json from server
-    url = "https://sncdeveloper.cn/2-7-12-17-22.json"
+    url = "https://sncdeveloper.cn/2-7-12-17-22_new.json"
     res = requests.get(url=url)
     # print(res.json()['m2'])
     data = []
@@ -68,7 +68,10 @@ def xw_toExcel(data, fileName, title):  # xlsxwriter库储存数据到excel
     i = 2
     for j in range(len(data)):
         row = 'A' + str(i)
-        worksheet1.write_row(row, data[j])
+        try:
+            worksheet1.write_row(row, data[j])
+        except Exception as e:
+            pass
         i += 1
     # close table
     workbook.close()

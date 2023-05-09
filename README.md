@@ -21,6 +21,12 @@ git clone git@github.com:Kingsdom005/knowledge-graph-subsystem.git
 pip install -r requirements.txt
 ```
 
+If your pip is not the latest version，please first run the following command:
+
+```shell
+python.exe -m pip install --upgrade pip
+```
+
 **Run spider to crawl site2/7/12/17/22 and output files**
 
 ```shell

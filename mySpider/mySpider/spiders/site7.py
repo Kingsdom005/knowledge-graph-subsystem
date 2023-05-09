@@ -17,7 +17,7 @@ class Site7Spider(scrapy.Spider):
     SUCCESS_COUNT = 0
     TOTAL_COUNT = 0
     # data page range
-    start_page = 1
+    start_page = 0
     end_page = 66 # max page approx 66
     # run time
     start_time = 0
@@ -96,7 +96,7 @@ class Site7Spider(scrapy.Spider):
         self.f.write(msg + " [" + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()) + "]\n")
         # self.f.write("Total:{}\n".format(self.TOTAL_COUNT))
         # output to screen
-        if self.TOTAL_COUNT == (self.end_page - self.start_page) * 15:
+        if self.TOTAL_COUNT == (self.end_page - self.start_page + 1) * 15:
             # record time
             self.end_time = time.time()
             # log runtime hour:minute:seconds

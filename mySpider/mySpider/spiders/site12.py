@@ -21,7 +21,7 @@ class Site12Spider(scrapy.Spider):
 
 
     # start_urls = ["https://www.nga.gov/exhibitions/2023/going-through-hell-divine-dante.html"] #"https://www.nga.gov/",
-
+    # https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__1.json?searchterm=china&_=1683629214256
     # img = https://media.nga.gov/iiif/bc6196b4-e6c8-476a-9e37-754e1394eb43/full/!400,/0/default.jpg
     # https://media.nga.gov/iiif/1ff7cdea-f23a-4158-bb9a-ede300b87574/full/full/0/default.jpg?attachment_filename=hunting_scene_with_a_pond_1970.17.102.jpg
     # https://media.nga.gov/iiif/c771e519-15ae-4f89-a8f6-b382dc655d70/full/full/0/default.jpg?attachment_filename=christ_on_the_road_to_emmaus_1966.13.6.jpg
@@ -60,7 +60,7 @@ class Site12Spider(scrapy.Spider):
 
                 item["onview"] = data[i]['onview']
 
-                item["web_url"] = "https://collections.artsmia.org/art/{}".format(str(data[i]["id"]))
+                item["web_url"] = "https://www.nga.gov/collection/art-object-page.{}.html".format(str(data[i]["id"]))
                 item["img_url"] = data[i]["imagepath"]
 
                 item["submit_time"] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
