@@ -1,0 +1,36 @@
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__2.json?searchterm=china&_=1682083002327: with 0 success and 30 pass. [2023-05-09 18:51:19]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__1.json?searchterm=china&_=1682083002327: with 10 success and 20 pass. [2023-05-09 18:51:19]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__3.json?searchterm=china&_=1682083002327: with 0 success and 30 pass. [2023-05-09 18:51:20]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__4.json?searchterm=china&_=1682083002327: with 0 success and 30 pass. [2023-05-09 18:51:20]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__5.json?searchterm=china&_=1682083002327: with 0 success and 30 pass. [2023-05-09 18:51:22]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__6.json?searchterm=china&_=1682083002327: with 0 success and 30 pass. [2023-05-09 18:51:23]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__7.json?searchterm=china&_=1682083002327: with 16 success and 14 pass. [2023-05-09 18:51:25]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__8.json?searchterm=china&_=1682083002327: with 27 success and 3 pass. [2023-05-09 18:51:26]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__9.json?searchterm=china&_=1682083002327: with 29 success and 1 pass. [2023-05-09 18:51:27]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__10.json?searchterm=china&_=1682083002327: with 30 success and 0 pass. [2023-05-09 18:51:29]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__11.json?searchterm=china&_=1682083002327: with 14 success and 16 pass. [2023-05-09 18:51:30]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__12.json?searchterm=china&_=1682083002327: with 3 success and 27 pass. [2023-05-09 18:51:31]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__13.json?searchterm=china&_=1682083002327: with 2 success and 28 pass. [2023-05-09 18:51:32]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__14.json?searchterm=china&_=1682083002327: with 9 success and 21 pass. [2023-05-09 18:51:33]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__15.json?searchterm=china&_=1682083002327: with 23 success and 7 pass. [2023-05-09 18:51:34]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__16.json?searchterm=china&_=1682083002327: with 12 success and 18 pass. [2023-05-09 18:51:35]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__17.json?searchterm=china&_=1682083002327: with 0 success and 30 pass. [2023-05-09 18:51:36]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__18.json?searchterm=china&_=1682083002327: with 11 success and 19 pass. [2023-05-09 18:51:37]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__19.json?searchterm=china&_=1682083002327: with 18 success and 12 pass. [2023-05-09 18:51:38]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__20.json?searchterm=china&_=1682083002327: with 16 success and 14 pass. [2023-05-09 18:51:39]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__21.json?searchterm=china&_=1682083002327: with 13 success and 17 pass. [2023-05-09 18:51:40]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__22.json?searchterm=china&_=1682083002327: with 14 success and 16 pass. [2023-05-09 18:51:42]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__23.json?searchterm=china&_=1682083002327: with 5 success and 25 pass. [2023-05-09 18:51:43]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__24.json?searchterm=china&_=1682083002327: with 22 success and 8 pass. [2023-05-09 18:51:44]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__25.json?searchterm=china&_=1682083002327: with 30 success and 0 pass. [2023-05-09 18:51:46]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__26.json?searchterm=china&_=1682083002327: with 30 success and 0 pass. [2023-05-09 18:51:48]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__27.json?searchterm=china&_=1682083002327: with 23 success and 7 pass. [2023-05-09 18:51:48]
+Crawl https://www.nga.gov/global-site-search-page/jcr:content/parmain/facetcomponent/parList/global_sitesearch_result.pageSize__30.pageNumber__28.json?searchterm=china&_=1682083002327: with 29 success and 1 pass. [2023-05-09 18:51:49]
+
+Total program running time (hour:minute:second) is 0:00:36
+
+##########################################
+
+Error-0 Pass-454 Success-386 Total-840
+
+##########################################
