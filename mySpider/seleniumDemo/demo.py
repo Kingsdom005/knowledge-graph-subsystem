@@ -4,17 +4,29 @@ import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
+from selenium.webdriver.chrome.service import Service
+
 def antiInsectBrowser():
     option = webdriver.ChromeOptions()
     option.page_load_strategy = 'none' # normal,eager,none
     option.add_experimental_option('excludeSwitches', ['enable-automation'])
     option.add_experimental_option('useAutomationExtension', False)
+
+    # s = Service(executable_path=ChromeDriverManager().install())
+    # browser = webdriver.Chrome(service=s, options=option)
+    #
     browser = webdriver.Chrome(executable_path=ChromeDriverManager().install(),options=option)
+
+
     browser.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument',{'source': 'Object.defineProperty(navigator, "webdriver", {get: () => undefined})'})
     return browser
 
+print(ChromeDriverManager().install())
+
 driver = antiInsectBrowser() #webdriver.Chrome(ChromeDriverManager().install())
-driver.get("https://www.roots.gov.sg/search?query=china&page=2")
+ress=driver.get("https://www.roots.gov.sg/search?query=china&page=2")
+
+print(ress)
 time.sleep(1)
 datas = driver.page_source
 
