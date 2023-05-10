@@ -44,7 +44,7 @@ scrapy crawl site22 -o save/22.json -o save/22.csv
 You can modify the data source in a fixed format.
 
 ```shell
-python excel.py
+python csv.py
 ```
 
 The data source we crawled have been published at https://sncdeveloper.cn/2-7-12-17-22_new.json
