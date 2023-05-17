@@ -54,23 +54,24 @@ class Site22Spider(scrapy.Spider):
         try:
             item["id"] = response.meta["id"]
             item["title"] = title
-            item["dated"] = "unknown"
+            item["dated"] = response.meta["country"]
             item["artist"] = artist
             item["role"] = "unknown"
             item["department"] = "Nezu Museum"
             item["medium"] = medium
-            item["country"] = response.meta["country"]
+            item["country"] = "china"
             item["description"] = description
             item["comments"] = "unknown"
             item["web_url"] = response.url
             item["img_url"] = response.meta["img_url"]
             item["submit_time"] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
-            if ("china" in item["country"]) or ("China" in item["country"]):
+            if ("china" in item["dated"]) or ("China" in item["dated"]) or ("Western Xia" in item["dated"]):
                 self.SUCCESS_COUNT+=1
                 self.TOTAL_COUNT+=1
                 self.set_log(msg="Crawl {}: Success.".format(response.url))
                 yield item  # 将item提交给管道
             else:
+                item["country"] = item["dated"]
                 self.PASS_COUNT += 1
                 self.TOTAL_COUNT += 1
                 self.set_log(msg="Crawl {}: Pass. Ignore place {}".format(response.url, item["country"]))

@@ -18,7 +18,7 @@ class Site7Spider(scrapy.Spider):
     TOTAL_COUNT = 0
     # data page range
     start_page = 0
-    end_page = 66 # max page approx 66
+    end_page = 666  # max page approx 666
     # run time
     start_time = 0
     end_time = 0
@@ -43,7 +43,7 @@ class Site7Spider(scrapy.Spider):
         self.f = open("save/site7_log.txt", "w", encoding="utf-8")
         for i in range(self.start_page,self.end_page+1): # 请求前100页数据 max 666
             # q=china make sure chinese creation
-            url = "https://api.vam.ac.uk/v2/objects/search?q=china&page=%s&page_size=15"%(str(i))
+            url = "https://api.vam.ac.uk/v2/objects/search?q=chinese&page=%s&page_size=15"%(str(i))
             yield Request(url)
 
     def parse_second(self, response):
@@ -60,16 +60,16 @@ class Site7Spider(scrapy.Spider):
             for i in data['record']["artistMakerPerson"]:
                 artist += i['name']['text'] + ";"
             item["artist"] = artist
-            # item["artist"] = data['record']["artistMakerPerson"][0]['name']['text']  # bug 多个作者
+            # item["artist"] = data['record']["artistMakerPerson"][0]['name']['text']  # 多个作者
 
-            item["role"] = data['record']["objectType"] #类型
+            item["role"] = data['record']["objectType"]  # 类型
             item["department"] = data["meta"]['images']['_images_meta'][0]['copyright']
 
             material = ""
             for i in data['record']["materials"]:
                 material += i['text'] + ";"
             item["medium"] = material
-            # item["medium"] = data['record']["materials"][0]['text']  # bug
+            # item["medium"] = data['record']["materials"][0]['text']  # 多个材质
             item["country"] = response.meta['place']
 
             item["description"] = data['record']["summaryDescription"]

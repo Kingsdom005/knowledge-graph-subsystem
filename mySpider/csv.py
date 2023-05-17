@@ -6,7 +6,7 @@ import requests
 # get data from my server and parse it into a triplet form
 def parse_ternary(choice):
     # get json from server
-    url = "https://sncdeveloper.cn/2-7-12-17-22_new.json"
+    url = "https://sncdeveloper.cn/public.json"
     res = requests.get(url=url)
     # print(res.json()['m2'])
     data = []
